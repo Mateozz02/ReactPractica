@@ -1,12 +1,16 @@
-import { useState } from "react";
 import "./App.css";
+import { useState } from "react";
 import { Button } from "./components/index.ts";
 
 function App() {
-  const counter = [data,setData] () => {useState(0)}
+  const [data, setData] = useState(0);
+  const apretalo = () => {
+    setData((data) => data + 1);
+  };
+
   return (
     <>
-      <Button></Button>
+      <Button label={`El numero es ${data}`} parentMethod={apretalo}></Button>
     </>
   );
 }
