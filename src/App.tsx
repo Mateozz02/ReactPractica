@@ -1,16 +1,36 @@
 import "./App.css";
 import { useState } from "react";
 import { Button } from "./components/index.ts";
-
+import { useFetch } from "./hooks/useFetch.ts";
+interface Data {
+  name: string;
+  id: number;
+  email: string;
+}
 function App() {
-  const [data, setData] = useState(0);
+  const [counter, setCounter] = useState(0);
   const apretalo = () => {
-    setData((data) => data + 1);
+    setCounter((counter) => counter + 1);
   };
 
+  const { data, error, loading } = useFetch<Data>(
+    "https://jsonplaceholder.typicode.com/users",
+  );
+
+  if (loading) {
+    return <div>Cargando...</div>;
+  }
+  if (error) {
+    return <div>Se rompio TODO</div>;
+  }
   return (
     <>
-      <Button label={`El numero es ${data}`} parentMethod={apretalo}></Button>
+      <Button
+        label={`El numero es ${counter}`}
+        parentMethod={apretalo}
+      ></Button>
+
+      <div>{JSON.stringify(data)}</div>
     </>
   );
 }
