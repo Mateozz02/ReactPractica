@@ -13,7 +13,7 @@ function App() {
     setCounter((counter) => counter + 1);
   };
 
-  const { data, error, loading } = useFetch<Data>(
+  const { data, error, loading } = useFetch<Data[]>(
     "https://jsonplaceholder.typicode.com/users",
   );
 
@@ -23,6 +23,9 @@ function App() {
   if (error) {
     return <div>Se rompio TODO</div>;
   }
+  if (!data) {
+    return <div>No se encontraron datos.</div>;
+  }
   return (
     <>
       <Button
@@ -30,7 +33,14 @@ function App() {
         parentMethod={apretalo}
       ></Button>
 
-      <div>{JSON.stringify(data)}</div>
+      <div>
+        {data.map((e) => (
+          <div key={e.id}>
+            <p>{e.name}</p>
+            <p>{e.email}</p>
+          </div>
+        ))}
+      </div>
     </>
   );
 }
