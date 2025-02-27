@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState } from "react";
-import { Button } from "./components/index.ts";
+import { Button, CustomForm } from "./components/index.ts";
 import { useFetch } from "./hooks/useFetch.ts";
 interface Data {
   name: string;
@@ -32,7 +32,7 @@ function App() {
         label={`El numero es ${counter}`}
         parentMethod={apretalo}
       ></Button>
-
+      <CustomForm></CustomForm>
       <div>
         {data.map((e) => (
           <div key={e.id}>
